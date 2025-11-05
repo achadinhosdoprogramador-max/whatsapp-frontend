@@ -1,6 +1,6 @@
 // client/src/components/GroupChat.js - DIÁLOGO COMPLETO DO GRUPO
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Message from './Message';
 import './GroupChat.css';
 
@@ -8,6 +8,9 @@ const GroupChat = ({ city, onEnterGroup }) => {
   const [groupMessages, setGroupMessages] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [showJoinButton, setShowJoinButton] = useState(false);
+  
+  // REF PARA SCROLL AUTOMÁTICO
+  const messagesEndRef = useRef(null);
 
   // Função para obter DDD baseado na cidade (exemplo simplificado)
   const getDDD = () => {
@@ -87,6 +90,22 @@ const GroupChat = ({ city, onEnterGroup }) => {
     }
   }, [currentStep]);
 
+  // NOVO useEffect PARA SCROLL AUTOMÁTICO
+  useEffect(() => {
+    // Scroll para baixo sempre que novas mensagens chegarem
+    scrollToBottom();
+  }, [groupMessages, showJoinButton]);
+
+  // FUNÇÃO PARA SCROLL AUTOMÁTICO
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({ 
+        behavior: "smooth",
+        block: "end"
+      });
+    }, 100);
+  };
+
   return (
     <div className="group-chat-container">
       {/* Área de mensagens do grupo */}
@@ -102,6 +121,9 @@ const GroupChat = ({ city, onEnterGroup }) => {
             }} 
           />
         ))}
+        
+        {/* ELEMENTO INVISÍVEL PARA SCROLL */}
+        <div ref={messagesEndRef} />
       </div>
 
       {/* Botão de entrar no grupo (aparece após o diálogo) */}
