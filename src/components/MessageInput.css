@@ -1,31 +1,37 @@
 /* client/src/components/MessageInput.css */
 
 .message-input {
-  background-color: #f0f2f5; /* Um cinza claro, padrão do WhatsApp */
+  background-color: #f0f2f5;
   display: flex;
   align-items: center;
   padding: 10px 16px;
-  border-top: 1px solid #ddd; /* Uma linha sutil de separação */
+  border-top: 1px solid #ddd;
+  
+  /* MELHORIAS PARA MOBILE - ADICIONE ESTAS LINHAS */
+  position: sticky;
+  bottom: 0;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
 }
 
 .message-input input {
-  flex-grow: 1; /* Faz o campo de texto ocupar o máximo de espaço */
+  flex-grow: 1;
   border: none;
   border-radius: 20px;
   padding: 10px 15px;
   font-size: 15px;
 }
 
-/* Remove a borda azul padrão que aparece ao clicar no input */
 .message-input input:focus {
   outline: none;
 }
 
 .message-input button {
-  background-color: #005E54; /* Mesmo verde do cabeçalho */
+  background-color: #005E54;
   color: white;
   border: none;
-  border-radius: 50%; /* Deixa o botão perfeitamente redondo */
+  border-radius: 50%;
   width: 45px;
   height: 45px;
   margin-left: 10px;
@@ -34,17 +40,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s; /* Efeito suave ao passar o mouse */
+  transition: background-color 0.2s;
 }
 
 .message-input button:hover {
-    background-color: #007A6E; /* Um tom de verde um pouco mais claro */
+  background-color: #007A6E;
 }
+
 .button-options-container {
   display: flex;
   flex-direction: column;
   padding: 10px;
   background-color: #f0f2f5;
+  
+  /* MELHORIAS PARA MOBILE - ADICIONE ESTAS LINHAS */
+  position: sticky;
+  bottom: 0;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  padding-left: max(10px, env(safe-area-inset-left));
+  padding-right: max(10px, env(safe-area-inset-right));
 }
 
 .choice-button {
@@ -63,19 +77,19 @@
 .choice-button:hover {
   background-color: #e0f2f1;
 }
-/* AJUSTES PARA MOBILE */
+
+/* MANTENHA SEUS AJUSTES EXISTENTES E ADICIONE: */
 @media (max-width: 768px) {
   .message-input {
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
-    position: sticky;
-    bottom: 0;
-    background-color: #f0f2f5;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
   }
   
   .button-options-container {
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
-    position: sticky;
-    bottom: 0;
-    background-color: #f0f2f5;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+  
+  /* GARANTIR QUE O CONTEÚDO NÃO FIQUE ATRÁS DOS BOTÕES */
+  .group-chat-container {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
